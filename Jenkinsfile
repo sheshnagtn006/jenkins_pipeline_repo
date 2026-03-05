@@ -14,7 +14,7 @@ pipeline {
                 sh ''' 
                 #!/bin/bash
                 pwd
-                ls-lrt
+                ls -lrt
                 sleep 5
                 '''
                 echo "This is stage 2"
