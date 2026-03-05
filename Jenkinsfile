@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    
+
     stages {
         stage ('Stage 1') {
             steps {
@@ -10,7 +10,7 @@ pipeline {
             }
         }
         stage ('stage 2') {
-            step {
+            steps {
                 sh ''' 
                 #!/bin/bash
                 pwd
