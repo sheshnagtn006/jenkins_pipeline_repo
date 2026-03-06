@@ -1,31 +1,22 @@
 pipeline {
-    agent none
+    agent none // option given to choose the node on stage level and labels are mentioned in stage
 
+    parameters {
+        string(name: 'NAME', default:, description: 'saying the name here')
+        boolean(name: 'SKIP_TEST', description: 'want to skip test')
+        choice(name: 'BRANCH', choices: ['master', 'stagging', 'prod'], description: '')
+    }
 
     stages {
         stage ('Stage 1') {
 
-            agent { label 'slave1' }
+            agent { label 'slave1' }  // stage1 run in slave1 labeled node
             
             steps {
-                sh 'sleep 5'
-                echo "This is the stage1"
-            }
-        }
-        stage ('stage 2') {
-
-            agent { label 'slave2' }
-
-            steps {
-                sh ''' 
-                #!/bin/bash
-                pwd
-                ls -lrt
-                sleep 5
-                '''
-                echo "This is stage 2"
+                echo "NAME: ${params.NAME}"
+                echo "SKIP_TEST: ${params.SKIP_TEST}"
+                echo "BRANCH TO DEPLOY: ${params.BRANCH}"
             }
         }
     }
 }
-
