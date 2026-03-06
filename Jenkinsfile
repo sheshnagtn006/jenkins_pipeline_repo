@@ -2,7 +2,7 @@ pipeline {
     agent none // option given to choose the node on stage level and labels are mentioned in stage
 
     parameters {
-        string(name: 'NAME', default:, description: 'saying the name here')
+        string(name: 'NAME', defaultValue:, description: 'saying the name here')
         boolean(name: 'SKIP_TEST', description: 'want to skip test')
         choice(name: 'BRANCH', choices: ['master', 'stagging', 'prod'], description: '')
     }
