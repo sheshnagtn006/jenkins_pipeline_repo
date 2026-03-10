@@ -1,23 +1,36 @@
 pipeline {
-    agent none // option given to choose the node on stage level and labels are mentioned in stage
-
-    environment {
-        DOCKER_USER = 'sheshnag'
-        AWS_ACCESS_KEY = '09024095465156'
-    }
+    agent any
 
     stages {
-        stage ('Stage 1') {
-
-            agent { label 'slave1' }  // stage1 run in slave1 labeled node
-            
+        stage ('STAGE!') {
             steps {
-                echo "DOCKER_USER: ${DOCKER_USER}"
-                echo "AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}"
+                echo "This is stage1 running"
+                sh 'sleep 5'
+            }
+        }
 
-                sh '''
-                    env
-                '''
+        stage ('PARALLEL TESTING') {
+            parallel {
+                stage('WINDOWS TESTING') {
+                    steps {
+                        echo "This is WINDOWS testing running"
+                        sh 'sleep 5'
+                    }
+                }
+
+                stage ('MACOS TESTING') {
+                    steps {
+                        echo "This is MACOS running"
+                        sh 'sleep 5'
+                    }
+                }
+            }
+        }
+
+        stage ('FINAL') {
+            steps {
+                echo "THis is final stage"
+                sh 'sleep 5'
             }
         }
     }
